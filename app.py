@@ -5,6 +5,9 @@ import pandas as pd
 from conditions import CONDITIONS
 from datetime import datetime
 import gspread
+import os
+from pytz import timezone
+TZ = timezone("America/Los_Angeles")
 
 def get_google_sheet():
     if "gcp_service_account" in st.secrets:
@@ -104,7 +107,7 @@ elif st.session_state.page == "context":
         st.rerun()
     if cols[2].button("Next", key="next_to_scenario"):
         st.session_state.record = {
-            "timestamp": datetime.now().isoformat(),
+            "timestamp": datetime.now(tz=TZ).isoformat(),
             "ai_use": st.session_state.ai_use,
             "baseline_trust": st.session_state.baseline_trust,
             "comfort": st.session_state.comfort,
