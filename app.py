@@ -43,37 +43,39 @@ GSHEET_HEADER = [
     "condition_key",
 ]
 
-# Initialize session state
-if "page" not in st.session_state:
-    st.session_state.page = "welcome"
-    st.session_state.ai_use = 4
-    st.session_state.baseline_trust = 4
-    st.session_state.comfort = 4
-    # st.session_state.selected_task = None
-    st.session_state.decision_confidence = 4
-    st.session_state.ai_influence = 4
-    st.session_state.trust_1 = 4
-    st.session_state.trust_2 = 4
-    st.session_state.trust_3 = 4
-    st.session_state.transparency_1 = 4
-    st.session_state.transparency_2 = 4
-    st.session_state.ux_1 = 4
-    st.session_state.ux_2 = 4
-    st.session_state.open_trust = ""
-    st.session_state.open_explanation = ""
-    st.session_state.open_improvement = ""
-    st.session_state.condition_key = random.choice(list(CONDITIONS.keys()))
-
 tasks = pd.DataFrame({
     "Task": [
         "Draft Project Report",
         "Reply to Emails",
         "Review Course Module",
-        "Organize Notes"
+        "Organize Notes",
     ],
     "Deadline": ["Today", "Today", "Tomorrow", "Friday"],
     "Importance": ["High", "Medium", "High", "Low"]
 })
+
+st.session_state.setdefault("page", "welcome")
+st.session_state.setdefault("ai_use", 4)
+st.session_state.setdefault("baseline_trust", 4)
+st.session_state.setdefault("comfort", 4)
+st.session_state.setdefault("selected_task", None)
+st.session_state.setdefault("decision_confidence", 4)
+st.session_state.setdefault("ai_influence", 4)
+st.session_state.setdefault("trust_1", 4)
+st.session_state.setdefault("trust_2", 4)
+st.session_state.setdefault("trust_3", 4)
+st.session_state.setdefault("transparency_1", 4)
+st.session_state.setdefault("transparency_2", 4)
+st.session_state.setdefault("ux_1", 4)
+st.session_state.setdefault("ux_2", 4)
+st.session_state.setdefault("open_trust", "")
+st.session_state.setdefault("open_explanation", "")
+st.session_state.setdefault("open_improvement", "")
+st.session_state.setdefault("condition_key", random.choice(list(CONDITIONS.keys())))
+if "condition_key" not in st.session_state:
+    st.session_state.condition_key = random.choice(
+        list(CONDITIONS.keys())
+    )
 
 condition = CONDITIONS[st.session_state.condition_key]
 
@@ -91,9 +93,9 @@ if st.session_state.page == "welcome":
 
 elif st.session_state.page == "context":
     st.title("Context Questions")
-    st.slider("I regularly use AI tools.", 1, 7, st.session_state.ai_use, key="ai_use")
-    st.slider("I generally trust AI recommendations.", 1, 7, st.session_state.baseline_trust, key="baseline_trust")
-    st.slider("I feel comfortable using AI to support decisions.", 1, 7, st.session_state.comfort, key="comfort")
+    st.slider("I regularly use AI tools.", 1, 7, key="ai_use")
+    st.slider("I generally trust AI recommendations.", 1, 7, key="baseline_trust")
+    st.slider("I feel comfortable using AI to support decisions.", 1, 7, key="comfort")
 
     cols = st.columns([1, 8, 1])
 
@@ -101,6 +103,12 @@ elif st.session_state.page == "context":
         st.session_state.page = "welcome"
         st.rerun()
     if cols[2].button("Next", key="next_to_scenario"):
+        st.session_state.record = {
+            "timestamp": datetime.now().isoformat(),
+            "ai_use": st.session_state.ai_use,
+            "baseline_trust": st.session_state.baseline_trust,
+            "comfort": st.session_state.comfort,
+        }
         st.session_state.page = "scenario"
         st.rerun()
 
@@ -110,44 +118,43 @@ elif st.session_state.page == "scenario":
     st.subheader("AI Recommendation")
     st.info(condition["recommendation"])
 
-    st.radio("Which task do you choose first?", tasks["Task"].tolist(), index = 0, key="selected_task")
-    st.slider("How confident are you in your decision?", 1, 7, st.session_state.decision_confidence, key="decision_confidence")
-    st.slider("How much did the AI influence your decision?", 1, 7, st.session_state.ai_influence, key="ai_influence")
+    st.radio("Which task do you choose first?", tasks["Task"].tolist(), key="selected_task")
+    st.slider("How confident are you in your decision?", 1, 7, key="decision_confidence")
+    st.slider("How much did the AI influence your decision?", 1, 7, key="ai_influence")
 
     cols = st.columns([1, 8, 1])
     if cols[0].button("Back", key="back_to_context"):
         st.session_state.page = "context"
         st.rerun()
     if cols[2].button("Next", key="next_to_post_task"):
+        st.session_state.record.update({
+            "selected_task": str(st.session_state.selected_task),
+            "decision_confidence": st.session_state.decision_confidence,
+            "ai_influence": st.session_state.ai_influence,
+        })
         st.session_state.page = "post_task"
         st.rerun()
 
 elif st.session_state.page == "post_task":
     st.title("Post-Task Survey")
-    st.slider("I trusted the AI recommendation.", 1, 7, st.session_state.trust_1, key="trust_1")
-    st.slider("The AI seemed reliable.", 1, 7, st.session_state.trust_2, key="trust_2")
-    st.slider("I would use this AI again.", 1, 7, st.session_state.trust_3, key="trust_3")
-    st.slider("I understood why the AI made its recommendation.", 1, 7, st.session_state.transparency_1, key="transparency_1")
-    st.slider("The explanation was helpful.", 1, 7, st.session_state.transparency_2, key="transparency_2")
-    st.slider("The interface was easy to use.", 1, 7, st.session_state.ux_1, key="ux_1")
-    st.slider("The AI helped me decide faster.", 1, 7, st.session_state.ux_2, key="ux_2")
-    st.text_area("What made the AI feel trustworthy or untrustworthy?", st.session_state.open_trust, key="open_trust")
-    st.text_area("Did the explanation feel helpful, excessive, or insufficient?", st.session_state.open_explanation, key="open_explanation")
-    st.text_area("What would improve this experience?", st.session_state.open_improvement, key="open_improvement")
+    st.slider("I trusted the AI recommendation.", 1, 7, key="trust_1")
+    st.slider("The AI seemed reliable.", 1, 7, key="trust_2")
+    st.slider("I would use this AI again.", 1, 7, key="trust_3")
+    st.slider("I understood why the AI made its recommendation.", 1, 7, key="transparency_1")
+    st.slider("The explanation was helpful.", 1, 7, key="transparency_2")
+    st.slider("The interface was easy to use.", 1, 7, key="ux_1")
+    st.slider("The AI helped me decide faster.", 1, 7, key="ux_2")
+    st.text_area("What made the AI feel trustworthy or untrustworthy?", key="open_trust")
+    st.text_area("Did the explanation feel helpful, excessive, or insufficient?", key="open_explanation")
+    st.text_area("What would improve this experience?", key="open_improvement")
 
     cols = st.columns([1, 6, 1])
     if cols[0].button("Back", key="back_to_scenario"):
         st.session_state.page = "scenario"
         st.rerun()
     if cols[2].button("Submit", key="submit_responses"):
-        record = {
-            "timestamp": datetime.now().isoformat(),
-            "ai_use": st.session_state.ai_use,
-            "baseline_trust": st.session_state.baseline_trust,
-            "comfort": st.session_state.comfort,
-            "selected_task": str(st.session_state.get("selected_task", "no_selection")),
-            "decision_confidence": st.session_state.decision_confidence,
-            "ai_influence": st.session_state.ai_influence,
+        st.session_state.record.update({
+
             "trust_1": st.session_state.trust_1,
             "trust_2": st.session_state.trust_2,
             "trust_3": st.session_state.trust_3,
@@ -159,9 +166,10 @@ elif st.session_state.page == "post_task":
             "open_explanation": st.session_state.open_explanation,
             "open_improvement": st.session_state.open_improvement,
             "condition_key": st.session_state.condition_key
-        }
-        append_response_to_sheet(record)
+        })
+        append_response_to_sheet(st.session_state.record)
         st.session_state.page = "thank_you"
+        st.rerun()
 
 elif st.session_state.page == "thank_you":
     st.write("Thank you! Your responses have been recorded.")
