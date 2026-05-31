@@ -6,6 +6,19 @@ from conditions import CONDITIONS
 from datetime import datetime
 import gspread
 
+def get_google_sheet():
+    if "gcp_service_account" in st.secrets:
+        client = gspread.service_account_from_dict(st.secrets["gcp_service_account"])
+    else:
+        if not os.path.exists(GOOGLE_CREDS_PATH):
+            raise FileNotFoundError(
+                f"Google credentials not found at {GOOGLE_CREDS_PATH}. "
+                "Set GOOGLE_SHEETS_CREDENTIALS or place your service_account.json there."
+            )
+        client = gspread.service_account(filename=GOOGLE_CREDS_PATH)
+
+    return client.open_by_key(SPREADSHEET_ID).sheet1
+
 SPREADSHEET_ID = "1WqVwLb451ADnHvn4nvKbCoF9JteGy_Z4vh0Pm6VDtkQ"
 GOOGLE_CREDS_PATH = os.environ.get("GOOGLE_SHEETS_CREDENTIALS", "service_account.json")
 
@@ -36,7 +49,7 @@ if "page" not in st.session_state:
     st.session_state.ai_use = 4
     st.session_state.baseline_trust = 4
     st.session_state.comfort = 4
-    st.session_state.selected_task = None
+    # st.session_state.selected_task = None
     st.session_state.decision_confidence = 4
     st.session_state.ai_influence = 4
     st.session_state.trust_1 = 4
@@ -63,17 +76,6 @@ tasks = pd.DataFrame({
 })
 
 condition = CONDITIONS[st.session_state.condition_key]
-
-def get_google_sheet():
-    if not os.path.exists(GOOGLE_CREDS_PATH):
-        raise FileNotFoundError(
-            f"Google credentials not found at {GOOGLE_CREDS_PATH}. "
-            "Set GOOGLE_SHEETS_CREDENTIALS or place your service_account.json there."
-        )
-    client = gspread.service_account(filename=GOOGLE_CREDS_PATH)
-    sheet = client.open_by_key(SPREADSHEET_ID).sheet1
-    return sheet
-
 
 def append_response_to_sheet(record):
     sheet = get_google_sheet()
@@ -143,7 +145,7 @@ elif st.session_state.page == "post_task":
             "ai_use": st.session_state.ai_use,
             "baseline_trust": st.session_state.baseline_trust,
             "comfort": st.session_state.comfort,
-            "selected_task": st.session_state.selected_task,
+            "selected_task": str(st.session_state.get("selected_task", "no_selection")),
             "decision_confidence": st.session_state.decision_confidence,
             "ai_influence": st.session_state.ai_influence,
             "trust_1": st.session_state.trust_1,
