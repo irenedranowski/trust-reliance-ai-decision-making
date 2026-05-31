@@ -5,3 +5,5 @@ scipy
 statsmodels
 matplotlib
 jupyter
+gspread
+google-auth

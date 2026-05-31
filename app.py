@@ -4,6 +4,31 @@ import os
 import pandas as pd
 from conditions import CONDITIONS
 from datetime import datetime
+import gspread
+
+SPREADSHEET_ID = "1WqVwLb451ADnHvn4nvKbCoF9JteGy_Z4vh0Pm6VDtkQ"
+GOOGLE_CREDS_PATH = os.environ.get("GOOGLE_SHEETS_CREDENTIALS", "service_account.json")
+
+GSHEET_HEADER = [
+    "timestamp",
+    "ai_use",
+    "baseline_trust",
+    "comfort",
+    "selected_task",
+    "decision_confidence",
+    "ai_influence",
+    "trust_1",
+    "trust_2",
+    "trust_3",
+    "transparency_1",
+    "transparency_2",
+    "ux_1",
+    "ux_2",
+    "open_trust",
+    "open_explanation",
+    "open_improvement",
+    "condition_key",
+]
 
 # Initialize session state
 if "page" not in st.session_state:
@@ -38,6 +63,22 @@ tasks = pd.DataFrame({
 })
 
 condition = CONDITIONS[st.session_state.condition_key]
+
+def get_google_sheet():
+    if not os.path.exists(GOOGLE_CREDS_PATH):
+        raise FileNotFoundError(
+            f"Google credentials not found at {GOOGLE_CREDS_PATH}. "
+            "Set GOOGLE_SHEETS_CREDENTIALS or place your service_account.json there."
+        )
+    client = gspread.service_account(filename=GOOGLE_CREDS_PATH)
+    sheet = client.open_by_key(SPREADSHEET_ID).sheet1
+    return sheet
+
+
+def append_response_to_sheet(record):
+    sheet = get_google_sheet()
+    row = [record[col] for col in GSHEET_HEADER]
+    sheet.append_row(row, value_input_option="USER_ENTERED")
 
 if st.session_state.page == "welcome":
     st.title("Trust & Reliance in AI Decision-Making")
@@ -98,7 +139,7 @@ elif st.session_state.page == "post_task":
         st.rerun()
     if cols[2].button("Submit", key="submit_responses"):
         record = {
-            "timestamp": datetime.now(),
+            "timestamp": datetime.now().isoformat(),
             "ai_use": st.session_state.ai_use,
             "baseline_trust": st.session_state.baseline_trust,
             "comfort": st.session_state.comfort,
@@ -117,14 +158,7 @@ elif st.session_state.page == "post_task":
             "open_improvement": st.session_state.open_improvement,
             "condition_key": st.session_state.condition_key
         }
-        df_row = pd.DataFrame([record])
-    
-        file_path = "pilot_feedback.csv"
-        if os.path.exists(file_path):
-            df_row.to_csv(file_path, mode="a", header=False, index=False)
-        else:
-            df_row.to_csv(file_path, index=False)
-        
+        append_response_to_sheet(record)
         st.session_state.page = "thank_you"
 
 elif st.session_state.page == "thank_you":
