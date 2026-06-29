@@ -130,7 +130,7 @@ The qualitative responses also help explain why Minimal Explanation performed un
 
 Overall, participants preferred AI recommendations that were concise, logical, and grounded in visible evidence. Both unsupported certainty and vague uncertainty created skepticism.
 
-## Limitations and Future Work
+## Limitations and Future Research
 While this study provides valuable exploratory insights into AI communication styles, several limitations should be considered when interpreting the results.
 
 - **Sample Size and Statistical Power:** With a total sample of 21 participants and uneven condition groups ranging from 4 to 7, the study had limited statistical power because of the small sample size and uneven group sizes. As a result, smaller effects may not have been detectable. Consequently, the quantitative findings are strictly exploratory, and non-significant results should not be interpreted as evidence that no relationship exists.
@@ -139,7 +139,7 @@ While this study provides valuable exploratory insights into AI communication st
 - **Construct Reliability:** While the composite scores for trust and transparency demonstrated acceptable to good internal consistency, the two-item user experience (UX) composite showed questionable reliability (α = 0.587). Future iterations could strengthen the measurement of user experience by using a more extensively validated instrument, such as the System Usability Scale (SUS) or UMUX-Lite.
 - **Ecological Validity:** The task prioritization scenario was a simulated, low-stakes exercise. Trust and reliance behaviors are highly context-dependent and often shift significantly when decisions carry real-world consequences in higher-stakes product contexts such as healthcare, finance, or workplace decision support.
 
-**Future Work**
+**Future Research**
 
 These initial findings establish a foundation for more robust behavioral testing. Next steps should include scaling this study to a larger, representative sample of non-expert users to validate the exploratory statistics. Additionally, future research should introduce a high-stakes decision scenario and measure behavioral reliance directly—by capturing a user’s initial independent choice before exposing them to the AI recommendation—to clearly isolate the difference between user agreement and AI influence.
 
