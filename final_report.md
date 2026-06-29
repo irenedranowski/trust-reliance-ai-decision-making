@@ -48,6 +48,8 @@ Decision confidence showed the most noticeable descriptive difference. Participa
 
 AI influence was highest in the Minimal Explanation and Uncertainty-Calibrated conditions and lowest in the High Confidence condition. User experience was highest for Minimal Explanation and lowest for Transparent Explanation, which may suggest a tradeoff between explanation detail and ease of use.
 
+![box and whiskers plots by communicaton condition](assets/distributions_by_communication_condition.png)
+
 ## Exploratory Statistical Tests
 
 Kruskal-Wallis tests were used to examine whether outcome distributions differed across the four conditions. This nonparametric test was appropriate because the outcomes were based on Likert-style ratings and the group sizes were small and uneven.
