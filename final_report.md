@@ -10,13 +10,23 @@ The study was designed to explore whether the way an AI communicates confidence 
 
 How do AI explanation style and confidence language influence perceived trust and reliance in AI-assisted decision-making?
 
-More specifically, the analysis examined whether communication style was associated with differences in trust, perceived transparency, AI influence, decision confidence, and user experience. The study also explored whether participants' written comments helped explain the quantitative patterns.
+The analysis examined whether communication style was associated with differences in trust, perceived transparency, AI influence, decision confidence, and user experience. The study also explored whether participants' written comments helped explain the quantitative patterns.
 
 ## Methods
 
 Participants completed a short AI-assisted decision-making activity. They first answered context questions about their AI use, baseline trust in AI, and comfort using AI for decisions. They then reviewed a task-prioritization scenario and received an AI recommendation. After making a decision, participants rated their confidence, the influence of the AI, trust in the AI, perceived transparency, and user experience using 1-7 rating scales. They also answered open-ended questions about what made the AI feel trustworthy or untrustworthy, whether the explanation felt helpful, and what would improve the experience.
 
-The cleaned dataset included 21 participant responses. Composite scores were calculated for trust, perceived transparency, and user experience. Trust was calculated from three trust items, transparency from two transparency items, and user experience from two UX items. AI influence and decision confidence were analyzed as individual rating items.
+The cleaned dataset included 21 participant responses. Participants were current or recent university graduates (master's and PhD level), primarily university employees and AI researchers/scientists, with an age range of approximately 29–35. Participants were recruited via the researcher's professional network. Detailed demographic characteristics beyond this description were not recorded in the dataset.
+
+Composite scores were calculated as unweighted means (simple averages) of their constituent items, with items measured on 1–7 Likert scales. Composites were rounded to two decimal places and saved in the cleaned dataset under the names shown below. No item weighting or reverse-coding was applied.
+
+- `trust_score` = (trust_1 + trust_2 + trust_3) / 3. Range: 1–7. Stored as `trust_score`.
+- `transparency_score` = (transparency_1 + transparency_2) / 2. Range: 1–7. Stored as `transparency_score`.
+- `ux_score` = (ux_1 + ux_2) / 2. Range: 1–7. Stored as `ux_score`.
+
+Each composite was computed only when all constituent items were present; if any item was missing, the composite was set to missing for that participant. Single-item measures (`ai_influence` and `decision_confidence`) were analyzed on their original rating scales.
+
+Cronbach's alpha was computed to assess internal consistency for the multi-item scales. Results (rounded to three decimals) were: `trust_score` α = 0.899 (good), `transparency_score` α = 0.705 (acceptable), and `ux_score` α = 0.587 (questionable). Because the sample is small and some scales include only two items, these estimates should be interpreted cautiously. Composite-based inferences therefore remain primarily descriptive and exploratory.
 
 ## Random Assignment and Condition Counts
 
@@ -35,12 +45,12 @@ The groups were uneven and small, ranging from 4 to 7 participants per condition
 
 Trust scores were very similar across the four conditions. Mean trust ranged from 3.89 to 3.95, suggesting that communication style alone did not substantially shift overall trust in this sample.
 
-| Condition | Trust | Transparency | AI Influence | Decision Confidence | UX |
+| Condition | Trust (M, SD) | Transparency (M, SD) | AI Influence (M, SD) | Decision Confidence (M, SD) | UX (M, SD) |
 |---|---:|---:|---:|---:|---:|
-| High Confidence | 3.95 | 4.36 | 2.14 | 5.57 | 4.36 |
-| Minimal Explanation | 3.92 | 5.12 | 3.50 | 4.75 | 4.88 |
-| Transparent Explanation | 3.92 | 4.38 | 2.50 | 7.00 | 3.50 |
-| Uncertainty-Calibrated | 3.89 | 4.42 | 3.50 | 6.67 | 4.75 |
+| High Confidence | 3.95 (3.00) | 4.36 (2.17) | 2.14 (1.35) | 5.57 (1.27) | 4.36 (1.91) |
+| Minimal Explanation | 3.92 (1.71) | 5.12 (1.65) | 3.50 (1.73) | 4.75 (2.22) | 4.88 (1.84) |
+| Transparent Explanation | 3.92 (2.25) | 4.38 (2.87) | 2.50 (2.38) | 7.00 (0.00) | 3.50 (2.80) |
+| Uncertainty-Calibrated | 3.89 (1.64) | 4.42 (2.25) | 3.50 (2.43) | 6.67 (0.52) | 4.75 (1.37) |
 
 Perceived transparency was highest in the Minimal Explanation condition. This was unexpected, but participant comments suggest that some users interpreted short and direct recommendations as clearer or easier to process.
 
@@ -102,7 +112,7 @@ However, minimal explanation was not universally effective. One participant foun
 
 Participants in the Transparent Explanation condition also gave mixed responses. Some found the explanation helpful because it showed the AI's reasoning and made the recommendation easy to follow.
 
-Others were more skeptical. One participant said they had low baseline trust in AI and would need more data before increasing trust. Another felt the explanation was excessive and went beyond the available information. This suggests that transparency is useful when it is grounded and relevant, but too much explanation can feel speculative.
+Others were more skeptical. The participant who expressed the strongest skepticism in this condition also described having low baseline trust in AI and said they would need more data before increasing trust. Another participant felt the explanation was excessive and went beyond the available information. This directly links the qualitative feedback to the quantitative finding that baseline trust and comfort were related, and it suggests that transparency is useful when it is grounded and relevant, but too much explanation can feel speculative.
 
 ### Uncertainty-Calibrated
 
