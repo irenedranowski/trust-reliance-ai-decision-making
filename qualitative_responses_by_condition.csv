@@ -1,0 +1,22 @@
+condition_key,open_trust,open_explanation,open_improvement
+high_confidence,no_response,no_response,no_response
+high_confidence,The ai singled out the most urgent task accurately.,"The explanation was clear, coherent and accurate.",adding condiitons to recommendations would make the experience more reliable.
+high_confidence,no_response,no_response,no_response
+high_confidence,My understanding of AI is that it pulls material that is already existing online. Therefore it saves me time. I also find it to be trustworthy because I have not been provided false information thus far.,"Yes, the table was helpful in displaying what tasks take priority.",It would’ve been nice to have a sentence or two above the table to help explain what the table is representing.
+high_confidence,It was not trustworthy but its decision concurred with mine and,There was no explanation.,An explanation.
+high_confidence,The answer was concise and agreed with the intuitive answer to the question.,"It felt appropriate for the scenario given, although a little more explanation could have been given.",no_response
+high_confidence,"""Clearly"" is a red flag",Insufficient,More details in the context
+minimal_explanation,no_response,no_response,no_response
+minimal_explanation,Quick and straight to the point. Always seems logical,Helpful,I assume AI will only get smarter or more elaborate itself as more time elapses
+minimal_explanation,Followed logic that was not foreign to me,Helpful,"Not sure exactly, I use as a guide and information gathering tool and organizing tool.  I view it as just another tool in the toolbox that I use every day.I also view it as much less intelligent than the human mind. Thus it is helpful but the decision is mine."
+minimal_explanation,It was not trustworthy because it suggested an unusual recommendation of drafting project description.,The explanation was helpful.,no_response
+transparent_explanation,The advice AI gave just made sense and there was no need to correct it.,"Helpful,","If you really want to know how much AI has an impact on people's decision making I would have asked the question first, then show AI's recommendation, and then ask if you would change your answer or keep it the same based on what AI said."
+transparent_explanation,"My baseline trust in the AI is very low, and I'd require more data before raising my level of trust in it.","The explanation felt excessive, going beyond the available data to extrapolate impact on productivity.",More data points.
+transparent_explanation,I’d never use AI in that situation,Irrelevant,Nothing
+transparent_explanation,It explained the reasoning,Helpful,no_response
+uncertainty_calibrated,The AI had sound reasoning to support its recommendation,It felt helpful,It would help to go through a few examples to demonstrate the versatility of the AI.
+uncertainty_calibrated,no_response,no_response,no_response
+uncertainty_calibrated,no_response,no_response,no_response
+uncertainty_calibrated,The use of word “moderately” made it feel less trustworthy,"Felt redundant, not adding much insight","If it’s a simple decision, don’t use excessive word like “moderately”"
+uncertainty_calibrated,no_response,no_response,no_response
+uncertainty_calibrated,clear and logical answer  made it feel trustworthy; mild confidence made me doubt it,insufficient,"if the ai went into some what if scenario reasoning - like there's another high priority task but i'm choosing this one because if you did that one first you might not have time for this one, wait it depends how long it takes"
