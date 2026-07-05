@@ -8,6 +8,8 @@ This mixed-methods research project investigates how different AI communication 
 
 Participants completed a realistic decision-making scenario in which they reviewed a list of tasks and received an AI recommendation about which task to complete first. Although the recommendation itself remained constant, the AI's communication style varied across four experimental conditions, allowing the study to isolate the effects of explanation style and confidence language.
 
+This repository includes both the complete behavioral dataset and the custom Streamlit application used to collect it.
+
 The project combines behavioral research, statistical analysis, qualitative coding, and responsible AI design principles to better understand how AI can support—not replace—human decision-making.
 
 ---
@@ -47,7 +49,7 @@ The experiment evaluated four distinct AI communication styles.
 | `final_report.md`        | Final mixed-methods research report with findings and design recommendations.                 |
 | `open_response_notes.md` | Thematic analysis of participant comments.                                                    |
 | `assets/`                | Figures and visualizations used throughout the report.                                        |
-| `data/`                  | Local participant datasets (excluded from Git).                                               |
+| `data/`                  | Participant data.                                               |
 | `requirements.txt`       | Python dependencies.                                                                          |
 
 ---
