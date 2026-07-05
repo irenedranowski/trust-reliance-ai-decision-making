@@ -277,5 +277,4 @@ tmbootpicker.efi
 
 # Ignore datasets
 data/*
-synthetic_data.csv
-synthetic_data.py
+!data/participant_data.csv
