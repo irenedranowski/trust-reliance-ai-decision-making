@@ -1,5 +1,10 @@
 # Trust and Reliance in AI-Assisted Decision-Making
 
+**Looking for a complete research story?**
+Read the full UX Case study here:
+
+[View the UXfolio Study](https://uxfol.io/home/portfolios/71371022/p/cfea740a)
+
 ## Understanding When People Trust AI—and When They Actually Rely on It
 
 As AI becomes increasingly integrated into everyday decision-making, trust alone isn't enough. The critical question is whether people simply *trust* AI recommendations or whether those recommendations actually influence their decisions.
