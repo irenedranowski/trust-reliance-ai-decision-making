@@ -1,6 +1,7 @@
 # Trust and Reliance in AI-Assisted Decision-Making
 
-**Looking for a complete research story? Start with the UXfolio Case study.**
+**Looking for a complete research story?**
+**Start with the UXfolio Case study:**
 
 [View the UXfolio Study](https://uxfol.io/home/portfolios/71371022/p/cfea740a)
 
